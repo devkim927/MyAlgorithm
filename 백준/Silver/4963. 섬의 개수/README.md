@@ -1,3 +1,58 @@
+# TIL: 섬의 개수를 세는 문제 풀이
+### 문제 분석
+여러 개의 테스트 케이스가 주어짐.
+각 테스트 케이스는 두 개의 정수 w(가로 크기)와 h(세로 크기)가 주어지고, 그 다음에 h줄에 걸쳐 w개의 정수로 이루어진 지도(0: 바다, 1: 땅)가 주어진다.
+1인 곳이 섬이고, 연결된 1들이 하나의 섬을 이룬다.
+섬은 가로, 세로뿐만 아니라 대각선으로도 연결될 수 있기 때문에 8방향 탐색을 해야 한다.
+
+### 접근 방법
+DFS (깊이 우선 탐색):
+dfs(i, j) 함수는 주어진 좌표 (i, j)에서 시작하여, 8방향으로 연결된 1을 모두 방문하면서 하나의 섬을 탐색하는 함수입니다.
+섬을 하나씩 찾을 때마다 cnt를 증가시켜 섬의 개수를 셈.
+
+방문 체크:
+각 칸을 방문했는지 확인하기 위해 visited 배열을 사용하여 중복 방문을 방지.
+
+8방향 탐색:
+8방향으로 연결된 1을 탐색해야 하므로, dxy 리스트에 (0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, -1), (-1, 1)을 설정.
+
+종료 조건:
+입력이 0 0일 경우 종료
+
+
+```py
+def dfs(i, j):
+    global cnt
+    visited[i][j] = True
+    for dx, dy in dxy:
+        xi = i + dx
+        yj = j + dy
+
+        if 0 <= xi < h and 0 <= yj < w:
+            if grid[xi][yj] == 1 and visited[xi][yj] == False:
+                dfs(xi, yj)
+
+
+while True:
+    w, h = map(int, input().split())
+    if w == 0 and h == 0:
+        break
+    grid = [list(map(int, input().split())) for _ in range(h)]
+    visited = [([False] * w) for _ in range(h)]
+
+    dxy = [(0, 1), (1, 0), (0, -1), (-1, 0), (1, 1), (1, -1), (-1, -1), (-1, 1)]
+
+    cnt = 0
+    for i in range(h):
+        for j in range(w):
+            if grid[i][j] == 1 and visited[i][j] == False:
+                cnt += 1
+                dfs(i, j)
+
+    print(cnt)
+```
+
+
 # [Silver II] 섬의 개수 - 4963 
 
 [문제 링크](https://www.acmicpc.net/problem/4963) 
