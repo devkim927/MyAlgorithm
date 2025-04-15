@@ -3,8 +3,8 @@ M = int(input())
 start = N*N
 grid = [[False]*N for _ in range(N)]
 
-dy = [0, 1, 0, -1]
 dx = [1, 0, -1, 0]
+dy = [0, 1, 0, -1]
 i, j, dr = 0, 0, 0
 
 M_spot = [0, 0]
