@@ -1,5 +1,5 @@
 import sys
-sys.setrecursionlimit(10000)
+sys.setrecursionlimit(10000) # N 은 100이기 때문에 방문의 최대 횟수도 10000을 넘지 않을 것 같아 제한하여 런타임 에러 방지
 
 def eye(i, j, c):
     if grid[i][j] == c and visited[i][j] == False:              # 색상이 같은 것만 방문처리
