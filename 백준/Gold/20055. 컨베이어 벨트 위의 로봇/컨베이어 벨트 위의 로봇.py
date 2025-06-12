@@ -12,7 +12,7 @@ while True:
     robots[-1] = False
 
 
-    for i in range(N - 2, -1, -1):
+    for i in range(N - 1, -1, -1):
         if robots[i] and not robots[i + 1] and HP[i + 1] > 0:
             robots[i] = False
             robots[i + 1] = True
